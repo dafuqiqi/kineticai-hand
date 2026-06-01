@@ -546,6 +546,7 @@
             margin: 0;
             font-size: 16px;
             color: #1a1a1a;
+            font-weight: 600;
         }
 
         .toc-close {
@@ -558,89 +559,103 @@
         }
 
         .toc-content {
-            padding: 20px 0;
+            padding: 20px;
             position: relative;
-            padding-left: 25px;
-        }
-
-        /* 上下进度条线 */
-        .toc-content::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e0e0e0;
         }
 
         .toc-content ul {
             list-style: none;
             margin: 0;
             padding: 0;
+            position: relative;
+        }
+
+        /* 窹线连接 */
+        .toc-content ul::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, #ccc, #ddd);
+        }
+
+        .toc-content li:last-child::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -20px;
+            width: 24px;
+            height: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-right: none;
+            border-radius: 0 0 0 8px;
+        }
+
+        .toc-content li {
+            position: relative;
+            list-style: none;
         }
 
         .toc-item {
             display: block;
-            padding: 10px 20px;
-            color: #666;
+            padding: 12px 20px 12px 30px;
+            color: #999;
             text-decoration: none;
             font-size: 13px;
             transition: all 0.2s ease;
             position: relative;
         }
 
-        /* 目录项前的圆点（在进度条上） */
+        /* 圆点标记 */
         .toc-item::before {
             content: '';
             position: absolute;
-            left: -20px;
+            left: 6px;
             top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
+            background: #ddd;
+            border: 2px solid #fff;
             border-radius: 50%;
-            background-color: #d0d0d0;
-            transition: all 0.2s ease;
-            z-index: 1;
+            transform: translateY(-50%);
+            z-index: 2;
         }
 
         .toc-item:hover {
             color: #0066cc;
-            background-color: #f0f7ff;
-        }
-
-        .toc-item:hover::before {
-            background-color: #0066cc;
-            box-shadow: 0 0 6px rgba(0, 102, 204, 0.4);
         }
 
         .toc-item.active {
             color: #0066cc;
-            background-color: #f0f7ff;
             font-weight: 500;
         }
 
         .toc-item.active::before {
-            background-color: #0066cc;
-            width: 12px;
-            height: 12px;
-            left: -22px;
-            box-shadow: 0 0 8px rgba(0, 102, 204, 0.6);
+            background: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
         }
 
-        /* 两层级目录样式 */
-        .toc-item.level-2 {
-            padding-left: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #333;
-        }
-
+        /* 三层级目录样式 - 对齐美观 */
         .toc-item.level-3 {
-            padding-left: 40px;
+            padding-left: 30px;
+            font-size: 13px;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .toc-item.level-4 {
+            padding-left: 50px;
             font-size: 12px;
-            color: #666;
+            color: #aaa;
+        }
+
+        .toc-item.level-5 {
+            padding-left: 70px;
+            font-size: 12px;
+            color: #bbb;
         }
 
         .toc-content ul ul {
@@ -969,7 +984,7 @@
         <!-- 右侧 TOC 面板 -->
         <aside class="right-sidebar" id="rightSidebar">
             <div class="toc-header">
-                <h3>Contents</h3>
+                <h3>On this page</h3>
                 <button class="toc-close" id="tocClose">✕</button>
             </div>
             <nav class="toc-content" id="tocContent">
@@ -1037,14 +1052,14 @@
                 breadcrumb: 'Wave',
                 content: `
                     <section>
-                        <h2>Product Overview</h2>
+                        <h3>Product Overview</h3>
                         <p>[Wave产品概览。Wave是一个强大的解决方案，旨在简化和优化您的工作流程。]</p>
                     </section>
                     <section>
                         <h3>Safety Instructions</h3>
                         <p>[安全说明和注意事项。]</p>
                         
-                        <h4>General Safety Guidelines</h4>
+                        <h3>General Safety Guidelines</h3>
                         <p>[通用安全指南。在使用Wave之前，请阅读以下安全指南。]</p>
                         <ul>
                             <li>[安全指南条目1]</li>
@@ -1055,31 +1070,31 @@
                         <h4>Potential Hazards</h4>
                         <p>[潜在危险。请注意以下可能的危险情况。]</p>
                         
-                        <h5>Hot Surface</h5>
+                        <h4>Hot Surface</h4>
                         <p>[设备可能会产生高温表面。避免直接接触。]</p>
                         
-                        <h5>Pinch Points</h5>
+                        <h4>Pinch Points</h4>
                         <p>[注意移动部件可能造成的压夹伤害。]</p>
                         
-                        <h5>Electrical Safety</h5>
+                        <h4>Electrical Safety</h4>
                         <p>[电气安全注意事项。确保正确接地和连接。]</p>
                         
-                        <h5>Tactile Fingertips</h5>
+                        <h4>Tactile Fingertips</h4>
                         <p>[触觉传感器部件易损坏，请小心处理。]</p>
                         
                         <h4>Operating Requirements</h4>
                         <p>[操作要求。使用Wave需要满足以下条件。]</p>
                         
-                        <h5>Personnel</h5>
+                        <h4>Personnel</h4>
                         <p>[操作人员应具备相关培训资质。]</p>
                         
-                        <h5>Medical Devices</h5>
+                        <h4>Medical Devices</h4>
                         <p>[植入式医疗设备佩戴者使用注意事项。]</p>
                         
-                        <h5>Environment</h5>
+                        <h4>Environment</h4>
                         <p>[工作环境要求：温度范围 15-35°C，相对湿度 30-70%。]</p>
                         
-                        <h5>Handling</h5>
+                        <h4>Handling</h4>
                         <p>[正确的搬运和存储方法。]</p>
                     </section>
                     <section>
@@ -1142,7 +1157,7 @@
                         <h4>Sensing</h4>
                         <p>[传感器规格]</p>
                         
-                        <h5>Torque Sensors</h5>
+                        <h4>Torque Sensors</h4>
                         <p>[扭矩传感器。可测量关节处的扭矩。]</p>
                         <ul>
                             <li>测量范围：±10 N·m</li>
@@ -1150,7 +1165,7 @@
                             <li>频率：1000 Hz</li>
                         </ul>
                         
-                        <h5>Tactile Sensors</h5>
+                        <h4>Tactile Sensors</h4>
                         <p>[触觉传感器。提供触觉反馈和接触检测。]</p>
                         <ul>
                             <li>传感器数量：12个</li>
@@ -1214,11 +1229,49 @@
                         <h2>Get Started</h2>
                         <p>[开始使用Wave的快速指南。本部分将指导您完成初始设置和配置。]</p>
                         <div class="image-center">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e8eef5'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%231a1a1a'%3E快速开始指南%3C/text%3E%3C/svg%3E" alt="Wave快速开始指南"/>
+                            <img src="./images/1.png" alt="Wave快速开始指南"/>
                             <div class="image-caption">Wave产品安装流程图</div>
                         </div>
-                        <h3>系统要求</h3>
-                        <p>[请在此处列出Wave的系统要求]</p>
+                    </section>
+                    <section>
+                        <h3>Before You Start</h3>
+                        <p>[在开始之前，请确保您已准备好所有必需的工具和部件。]</p>
+                    </section>
+                    <section>
+                        <h3>Set Up Hardware</h3>
+                        <p>[设置硬件的步骤说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Mount the Hand</h3>
+                        <p>[安装手部组件的详细说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Place the Assembly</h3>
+                        <p>[放置组装件的位置和要求。]</p>
+                    </section>
+                    <section>
+                        <h3>Connect the Cable</h3>
+                        <p>[连接电缆的正确方法。]</p>
+                    </section>
+                    <section>
+                        <h3>Power On</h3>
+                        <p>[打开电源的步骤。]</p>
+                    </section>
+                    <section>
+                        <h3>Turn On the Device</h3>
+                        <p>[启动设备的操作说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Indicator Check</h3>
+                        <p>[检查指示灯状态。]</p>
+                    </section>
+                    <section>
+                        <h3>Install Sharpa Pilot</h3>
+                        <p>[安装Sharpa Pilot软件的步骤。]</p>
+                    </section>
+                    <section>
+                        <h3>Software Requirements</h3>
+                        <p>[软件的系统要求。]</p>
                         <table>
                             <thead>
                                 <tr>
@@ -1257,9 +1310,10 @@
                         </table>
                     </section>
                     <section>
-                        <h3>安装步骤</h3>
+                        <h3>Installation</h3>
+                        <p>[安装软件的步骤。]</p>
                         <ol class="step-list">
-                            <li>[第一步：下载Wave安装程序]</li>
+                            <li>[第一步：下载安装程序]</li>
                             <li>[第二步：运行安装向导]</li>
                             <li>[第三步：选择安装选项和路径]</li>
                             <li>[第四步：完成安装]</li>
@@ -1267,56 +1321,40 @@
                         </ol>
                     </section>
                     <section>
-                        <h3>版本对比</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>功能特性</th>
-                                    <th>标准版</th>
-                                    <th>专业版</th>
-                                    <th>企业版</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>基础功能</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>高级功能</td>
-                                    <td>✗</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>技术支持</td>
-                                    <td>社区</td>
-                                    <td>优先</td>
-                                    <td>24/7</td>
-                                </tr>
-                                <tr>
-                                    <td>最大用户数</td>
-                                    <td>10</td>
-                                    <td>100</td>
-                                    <td>无限</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h3>Connect to the Device</h3>
+                        <p>[连接到设备的方法。]</p>
                     </section>
                     <section>
-                        <h3>初始配置</h3>
-                        <p>[请在此处描述初始配置步骤]</p>
-                        <h4>配置示例</h4>
-                        <pre class="code-block"><code>[配置代码示例第一行]
-[配置代码示例第二行]
-[配置代码示例第三行]
-[配置代码示例第四行]</code></pre>
+                        <h3>Default Network Settings</h3>
+                        <p>[默认网络设置说明。]</p>
                     </section>
                     <section>
-                        <h3>常见问题</h3>
-                        <p>[在安装过程中遇到问题？请查看故障排除部分。]</p>
+                        <h3>Configure PC Network</h3>
+                        <p>[配置PC网络设置。]</p>
+                    </section>
+                    <section>
+                        <h3>Calibrate the Joints</h3>
+                        <p>[校准关节的步骤。]</p>
+                    </section>
+                    <section>
+                        <h3>Preparation</h3>
+                        <p>[校准前的准备工作。]</p>
+                    </section>
+                    <section>
+                        <h3>Calibration Procedure</h3>
+                        <p>[校准程序的详细说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Notes</h3>
+                        <p>[校准过程中需要注意的事项。]</p>
+                    </section>
+                    <section>
+                        <h3>Test Hand Movement</h3>
+                        <p>[测试手部运动的方法。]</p>
+                    </section>
+                    <section>
+                        <h3>Run a Demo</h3>
+                        <p>[运行演示程序。]</p>
                     </section>
                 `
             },
@@ -1327,29 +1365,146 @@
                     <section>
                         <h2>User Guide</h2>
                         <p>[Wave完整用户指南。本指南包含所有您需要了解的内容，以便充分利用Wave的所有功能。]</p>
-                        <p>[本指南涵盖基础知识、进阶功能和最佳实践。]</p>
                     </section>
                     <section>
-                        <h3>基本操作</h3>
-                        <p>[在这里添加Wave的基本操作说明。包括如何启动、停止和管理应用。]</p>
-                        <p>[介绍主要界面元素和菜单选项。]</p>
-                        <p>[说明如何进行常见任务。]</p>
+                        <h3>Package Contents</h3>
+                        <p>[产品包装内容清单。]</p>
                     </section>
                     <section>
-                        <h3>高级功能</h3>
-                        <p>[在这里添加Wave的高级功能说明。]</p>
-                        <p>[详细解释高级配置选项。]</p>
-                        <p>[提供高级用法示例。]</p>
+                        <h3>Hand Control</h3>
+                        <p>[手部控制说明。]</p>
+                        <h4>Control Basics</h4>
+                        <p>[控制基础知识。]</p>
+                        <h5>Control Sources</h5>
+                        <p>[控制信号来源。]</p>
+                        <h5>Control Rules</h5>
+                        <p>[控制规则说明。]</p>
                     </section>
                     <section>
-                        <h3>工作流程</h3>
-                        <p>[描述使用Wave的典型工作流程。]</p>
-                        <p>[提供一步一步的说明。]</p>
+                        <h3>State Feedback</h3>
+                        <p>[状态反馈信息。]</p>
                     </section>
                     <section>
-                        <h3>最佳实践</h3>
-                        <p>[列出使用Wave时的最佳实践。]</p>
-                        <p>[包括性能优化建议。]</p>
+                        <h3>Control Modes</h3>
+                        <p>[各种控制模式的说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Joint Order Definitions</h3>
+                        <p>[关节顺序定义。]</p>
+                    </section>
+                    <section>
+                        <h3>Control via SDK</h3>
+                        <p>[通过SDK进行控制。]</p>
+                        <h4>Getting Started</h4>
+                        <p>[快速入门指南。]</p>
+                        <h4>System Requirements</h4>
+                        <p>[系统要求。]</p>
+                        <h4>Running the Examples</h4>
+                        <p>[运行示例程序。]</p>
+                    </section>
+                    <section>
+                        <h3>Tactile Sensing</h3>
+                        <p>[触觉传感说明。]</p>
+                        <h4>Overview</h4>
+                        <p>[触觉传感概述。]</p>
+                        <h4>Tactile Outputs</h4>
+                        <p>[触觉输出说明。]</p>
+                        <h5>Output Selection Guidelines</h5>
+                        <p>[输出选择指南。]</p>
+                        <h5>Data Rate Selection Guidelines</h5>
+                        <p>[数据率选择指南。]</p>
+                        <h4>Using Tactile Data via SDK</h4>
+                        <p>[通过SDK使用触觉数据。]</p>
+                        <h4>Standard Mode</h4>
+                        <p>[标准模式说明。]</p>
+                        <h4>High-Performance Mode</h4>
+                        <p>[高性能模式说明。]</p>
+                    </section>
+                    <section>
+                        <h3>Visualization in Sharpa Pilot</h3>
+                        <p>[Sharpa Pilot中的可视化。]</p>
+                        <h4>Overview</h4>
+                        <p>[可视化概述。]</p>
+                        <h4>Visualization in Standard Mode</h4>
+                        <p>[标准模式下的可视化。]</p>
+                        <h4>Visualization in High-Performance Mode</h4>
+                        <p>[高性能模式下的可视化。]</p>
+                    </section>
+                    <section>
+                        <h3>Data Interpretation and Advanced Usage</h3>
+                        <p>[数据解释和高级用法。]</p>
+                        <h4>Sensing Area</h4>
+                        <p>[传感区域说明。]</p>
+                        <h4>Raw Images</h4>
+                        <p>[原始图像数据。]</p>
+                        <h4>Deformation Map</h4>
+                        <p>[变形图。]</p>
+                        <h4>Contact Point</h4>
+                        <p>[接触点信息。]</p>
+                        <h4>6-DOF Force</h4>
+                        <p>[6自由度力反馈。]</p>
+                        <h4>2D-3D Surface Mapping</h4>
+                        <p>[2D-3D表面映射。]</p>
+                    </section>
+                    <section>
+                        <h3>Integration</h3>
+                        <p>[集成指南。]</p>
+                        <h4>Overview</h4>
+                        <p>[集成概述。]</p>
+                        <h4>Interfaces</h4>
+                        <p>[接口说明。]</p>
+                        <h5>Available Interfaces</h5>
+                        <p>[可用接口列表。]</p>
+                        <h5>Interface Selection Guide</h5>
+                        <p>[接口选择指南。]</p>
+                        <h4>Mechanical Integration</h4>
+                        <p>[机械集成说明。]</p>
+                        <h5>Mounting Interfaces</h5>
+                        <p>[安装接口。]</p>
+                        <h5>Load Requirements</h5>
+                        <p>[负载要求。]</p>
+                        <h4>Electrical Integration</h4>
+                        <p>[电气集成说明。]</p>
+                        <h5>Power Requirements</h5>
+                        <p>[电源要求。]</p>
+                        <h5>Communication Interface</h5>
+                        <p>[通信接口。]</p>
+                    </section>
+                    <section>
+                        <h3>Dual-Hand Configuration</h3>
+                        <p>[双手配置说明。]</p>
+                        <h4>Wrist Connector</h4>
+                        <p>[腕部连接器。]</p>
+                        <h4>Connection Box</h4>
+                        <p>[连接盒。]</p>
+                        <h4>Internal Pin Pad</h4>
+                        <p>[内部引脚板。]</p>
+                    </section>
+                    <section>
+                        <h3>Integration Example</h3>
+                        <p>[集成示例。]</p>
+                        <h4>Install the Hand</h4>
+                        <p>[安装手部。]</p>
+                        <h4>Connect Power and Network</h4>
+                        <p>[连接电源和网络。]</p>
+                        <h4>Check Cable Routing</h4>
+                        <p>[检查电缆路由。]</p>
+                    </section>
+                    <section>
+                        <h3>Power On and Connect</h3>
+                        <p>[打开电源并连接。]</p>
+                    </section>
+                    <section>
+                        <h3>Wrist Camera Integration</h3>
+                        <p>[腕部摄像头集成。]</p>
+                        <h4>Design Considerations</h4>
+                        <p>[设计考虑因素。]</p>
+                        <h4>Camera Placement Guidelines</h4>
+                        <p>[摄像头放置指南。]</p>
+                        <h4>Mounting Design</h4>
+                        <p>[安装设计。]</p>
+                        <h4>Summary</h4>
+                        <p>[摘要。]</p>
                     </section>
                 `
             },
@@ -1388,215 +1543,198 @@
                 breadcrumb: 'Wave',
                 content: `
                     <section>
-                        <h2>Development</h2>
-                        <p>[Wave开发相关信息。如果您是开发者，请参考此部分获取技术文档和指南。]</p>
-                        <p>[本部分包含API参考、代码示例和最佳实践。]</p>
+                        <h3>SDK Overview</h3>
+                        <p>The Kaihand SDK provides comprehensive tools for controlling the robotic hand and accessing its sensors. This guide covers both Python and C++ implementations.</p>
                     </section>
                     <section>
-                        <h3>API文档</h3>
-                        <p>[API文档和详细的接口说明。]</p>
-                        <p>[包括请求和响应格式的示例。]</p>
-                        <h4>主要API端点</h4>
-                        <ul>
-                            <li>[API端点1及其说明]</li>
-                            <li>[API端点2及其说明]</li>
-                            <li>[API端点3及其说明]</li>
-                        </ul>
+                        <h3>Supported Languages</h3>
+                        <p>The SDK is available in Python and C++, with support for real-time control and tactile feedback integration.</p>
                     </section>
                     <section>
-                        <h3>代码示例</h3>
-                        <p>[提供多个编程语言的代码示例。]</p>
-                        <pre class="code-block"><code>[示例代码第一行]
-[示例代码第二行]
-[示例代码第三行]
-[示例代码第四行]
-[示例代码第五行]</code></pre>
+                        <h3>Core Capabilities</h3>
+                        <p>The SDK enables precise motion control, joint state monitoring, tactile data processing, and device configuration management.</p>
                     </section>
                     <section>
-                        <h3>集成指南</h3>
-                        <p>[说明如何将Wave集成到现有系统中。]</p>
-                        <p>[提供集成步骤和配置示例。]</p>
+                        <h3>Architecture Overview</h3>
+                        <p>The SDK uses a client-server architecture with efficient communication protocols for real-time control and data streaming.</p>
                     </section>
                     <section>
-                        <h2>文档中的媒体插入指南</h2>
-                        <p>本部分介绍如何在文档中插入图片、表格和其他媒体内容。</p>
+                        <h3>Typical Workflow</h3>
+                        <p>Standard workflow includes device discovery, connection establishment, state monitoring, motion commands, and sensor data processing.</p>
                     </section>
                     <section>
-                        <h3>图片插入方式</h3>
-                        <p>在文档中插入图片有多种方式，下面介绍常见方法：</p>
-                        
-                        <h4>方式1：基础图片插入</h4>
-                        <p>最简单的方式是使用 <code>&lt;img&gt;</code> 标签直接插入图片：</p>
-                        <pre class="code-block"><code>&lt;img src="path/to/image.png" alt="描述文字"&gt;</code></pre>
-                        <p>其中：</p>
-                        <ul>
-                            <li><code>src</code>：图片路径（相对路径或绝对URL）</li>
-                            <li><code>alt</code>：图片的替代文字（无法加载时显示，提高可访问性）</li>
-                        </ul>
-
-                        <h4>方式2：居中图片与标题</h4>
-                        <p>使用 <code>image-center</code> 类使图片居中，并添加标题：</p>
-                        <pre class="code-block"><code>&lt;div class="image-center"&gt;
-  &lt;img src="diagram.png" alt="系统架构图"&gt;
-  &lt;div class="image-caption"&gt;系统架构流程图&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        <div class="image-center">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='200' viewBox='0 0 350 200'%3E%3Crect width='350' height='200' fill='%23f0f4f8'/%3E%3Crect x='50' y='40' width='80' height='60' fill='%230066cc' stroke='%23004499' stroke-width='2'/%3E%3Ctext x='90' y='75' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='white'%3E前端%3C/text%3E%3Carrow x1='140' y1='70' x2='190' y2='70' stroke='%23333' stroke-width='2' marker-end='url(%23arrowhead)'/%3E%3Crect x='190' y='40' width='80' height='60' fill='%231a8917' stroke='%23156714' stroke-width='2'/%3E%3Ctext x='230' y='75' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='white'%3E后端%3C/text%3E%3C/svg%3E" alt="系统架构简图"/>
-                            <div class="image-caption">系统架构流程图示例</div>
-                        </div>
-
-                        <h4>方式3：左/右浮动图片</h4>
-                        <p>使用 <code>image-left</code> 或 <code>image-right</code> 类让文字环绕图片：</p>
-                        <pre class="code-block"><code>&lt;div class="image-left"&gt;
-  &lt;img src="feature.png" alt="功能说明"&gt;
-&lt;/div&gt;
-&lt;p&gt;这是文本内容，会在图片旁边显示...&lt;/p&gt;</code></pre>
-
-                        <h4>图片路径指南</h4>
-                        <p>您可以使用以下方式存储和引用图片：</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>方式</th>
-                                    <th>示例</th>
-                                    <th>优点</th>
-                                    <th>缺点</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>相对路径</strong></td>
-                                    <td><code>../images/demo.png</code></td>
-                                    <td>本地存储，加载快</td>
-                                    <td>需要维护文件结构</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>绝对URL</strong></td>
-                                    <td><code>https://cdn.example.com/image.png</code></td>
-                                    <td>CDN加速，可扩展</td>
-                                    <td>依赖网络</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Base64编码</strong></td>
-                                    <td><code>data:image/png;base64,iVBOR...</code></td>
-                                    <td>无需外部文件</td>
-                                    <td>文件大，加载慢</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>SVG内联</strong></td>
-                                    <td><code>&lt;svg&gt;...&lt;/svg&gt;</code></td>
-                                    <td>可编程，可扩展</td>
-                                    <td>代码复杂</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h3>Relationship with Sharpa Pilot</h3>
+                        <p>The SDK integrates seamlessly with Sharpa Pilot, allowing visualized control and data interpretation through the simulation environment.</p>
                     </section>
                     <section>
-                        <h3>表格插入方式</h3>
-                        <p>表格是展示结构化数据的最佳方式。以下介绍如何创建美观的表格。</p>
-
-                        <h4>基础表格结构</h4>
-                        <p>使用标准 HTML 表格标签：</p>
-                        <pre class="code-block"><code>&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;列1&lt;/th&gt;
-      &lt;th&gt;列2&lt;/th&gt;
-      &lt;th&gt;列3&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;数据1&lt;/td&gt;
-      &lt;td&gt;数据2&lt;/td&gt;
-      &lt;td&gt;数据3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-
-                        <h4>常见表格类型</h4>
-                        <p>根据内容类型选择合适的表格布局：</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>表格类型</th>
-                                    <th>用途</th>
-                                    <th>CSS类</th>
-                                    <th>示例内容</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>规格表</strong></td>
-                                    <td>产品规格、性能指标</td>
-                                    <td><code>specs-table</code></td>
-                                    <td>CPU、内存、存储等</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>对比表</strong></td>
-                                    <td>版本/产品对比</td>
-                                    <td>标准 <code>table</code></td>
-                                    <td>功能对比、价格对比</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>数据表</strong></td>
-                                    <td>统计数据、列表</td>
-                                    <td>标准 <code>table</code></td>
-                                    <td>销售数据、用户统计</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>API表</strong></td>
-                                    <td>接口文档、参数说明</td>
-                                    <td>标准 <code>table</code></td>
-                                    <td>参数名、类型、描述</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h4>规格表示例</h4>
-                        <p>使用 <code>specs-table</code> 类创建漂亮的规格表：</p>
-                        <table class="specs-table">
-                            <thead>
-                                <tr>
-                                    <th>配置项</th>
-                                    <th>参数值</th>
-                                    <th>说明</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>处理器</strong></td>
-                                    <td>Intel i7-12700K</td>
-                                    <td>12核16线程，基频3.6GHz</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>内存</strong></td>
-                                    <td>32GB DDR5</td>
-                                    <td>双通道，时序CAS 32</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>存储</strong></td>
-                                    <td>1TB NVMe SSD</td>
-                                    <td>顺序读取超过3000MB/s</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>GPU</strong></td>
-                                    <td>RTX 4080</td>
-                                    <td>16GB GDDR6X显存</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h3>Setup</h3>
+                        <p>Complete setup instructions for configuring your development environment and SDK installation.</p>
                     </section>
                     <section>
-                        <h3>最佳实践建议</h3>
-                        <ul>
-                            <li><strong>图片优化</strong>：使用适当的格式（PNG用于截图/图表，JPG用于照片）和压缩，保持文件大小在200KB以下</li>
-                            <li><strong>替代文字</strong>：为所有图片添加有意义的alt属性，提高可访问性</li>
-                            <li><strong>响应式设计</strong>：图片会自动缩放以适应屏幕宽度，无需额外配置</li>
-                            <li><strong>表格简洁</strong>：避免表格过宽，复杂数据可分多个表格展示</li>
-                            <li><strong>标题清晰</strong>：每个图片和表格都应有清晰的标题和说明</li>
-                            <li><strong>版本控制</strong>：在阿里云盘或GitHub中保留高分辨率原图，文档中使用优化版本</li>
-                        </ul>
+                        <h3>System Requirements</h3>
+                        <p>Minimum system requirements include Python 3.8+ or C++17 compiler, 4GB RAM, and network connectivity for device communication.</p>
+                    </section>
+                    <section>
+                        <h3>Installation</h3>
+                        <p>Step-by-step installation guide for the SDK package and language-specific setup.</p>
+                        <h4>Download</h4>
+                        <p>Download the latest SDK from the official repository or package manager.</p>
+                        <h4>Install the SDK Package</h4>
+                        <p>Use pip (Python) or build from source (C++) to install the SDK package.</p>
+                        <h4>Package Layout</h4>
+                        <p>Overview of the SDK package structure and key directories.</p>
+                        <h4>Language-Specific Setup</h4>
+                        <p>Configuration steps specific to Python and C++ environments.</p>
+                    </section>
+                    <section>
+                        <h3>Python SDK Guide</h3>
+                        <p>Complete guide for using the Python SDK with comprehensive examples and API documentation.</p>
+                        <h4>Quick Start</h4>
+                        <p></p>
+                        <h5>Before You Start</h5>
+                        <p>Prerequisites and initial setup required before developing with Python SDK.</p>
+                        <h5>Minimal Python Example</h5>
+                        <p>A simple example demonstrating basic SDK usage and device connection.</p>
+                        <h5>Run</h5>
+                        <p>Instructions for running Python examples and basic operations.</p>
+                        <h4>API Usage Guide</h4>
+                        <p></p>
+                        <h5>Device Discovery and Connection</h5>
+                        <p>Discover devices and establish connections with the robotic hand.</p>
+                        <h5>Getting the Manager Instance</h5>
+                        <p>Initialize and obtain the device manager instance for device discovery and management.</p>
+                        <h5>Discovering Devices</h5>
+                        <p>Search for and list available robotic hand devices on the network.</p>
+                        <h5>Connecting by Serial Number</h5>
+                        <p>Connect to a specific device using its unique serial number identifier.</p>
+                        <h5>Connecting by Hand Side</h5>
+                        <p>Connect to devices based on hand side designation (left or right hand).</p>
+                        <h5>Connecting with Configuration</h5>
+                        <p>Establish connections with custom configuration parameters and settings.</p>
+                        <h5>Checking Connection State</h5>
+                        <p>Monitor and verify the current connection state and status.</p>
+                        <h5>Disconnecting</h5>
+                        <p>Properly disconnect from the device and clean up resources.</p>
+                        <h4>Device Lifecycle</h4>
+                        <p></p>
+                        <h5>Waiting for Readiness</h5>
+                        <p>Wait for the device to complete initialization and reach ready state.</p>
+                        <h5>Explicit Start and Stop</h5>
+                        <p>Manually start and stop device operations with explicit control.</p>
+                        <h5>Destroying the Device Object</h5>
+                        <p>Properly destroy and release device objects and associated resources.</p>
+                        <h5>Rebooting the Device</h5>
+                        <p>Trigger device reboot and manage the reboot process.</p>
+                        <h4>Device Information and Configuration</h4>
+                        <p></p>
+                        <h5>Reading Device Information</h5>
+                        <p>Retrieve device metadata, version information, and hardware details.</p>
+                        <h5>Synchronizing Time</h5>
+                        <p>Synchronize system time with the device for accurate timestamp coordination.</p>
+                        <h5>Setting the Device IP Address</h5>
+                        <p>Configure and set static IP address for the device.</p>
+                        <h5>Current and Speed Coefficients</h5>
+                        <p>Configure current limiting and speed adjustment coefficients.</p>
+                        <h5>Generic Parameter Access</h5>
+                        <p>Access and modify generic device parameters through unified interface.</p>
+                        <h4>Motion Control</h4>
+                        <p></p>
+                        <h5>Enable State</h5>
+                        <p>Enable or disable motion control and actuator power state.</p>
+                        <h5>Control Source</h5>
+                        <p>Select and switch between different control input sources.</p>
+                        <h5>Control Mode</h5>
+                        <p>Switch between different control modes (position, impedance, force, etc.).</p>
+                        <h5>Position Control</h5>
+                        <p>Issue position-based motion commands to reach target joint positions.</p>
+                        <h5>Admittance Control</h5>
+                        <p>Use admittance control for compliant and interactive motion.</p>
+                        <h5>MIT Control</h5>
+                        <p>MIT (Motor output, Impedance, Torque feedback) control mode for advanced manipulation.</p>
+                        <h5>Reading Joint State</h5>
+                        <p>Read current joint angles, velocities, torques, and other state information.</p>
+                        <h5>Reading Joint Position Only</h5>
+                        <p>Efficiently read only the joint position data without full state information.</p>
+                        <h4>Tactile Data</h4>
+                        <p></p>
+                        <h5>Capability and Readiness</h5>
+                        <p>Check tactile sensor capabilities and readiness status.</p>
+                        <h5>Tactile Calibration</h5>
+                        <p>Perform tactile sensor calibration procedures and baseline setup.</p>
+                        <h5>Fetching Tactile Frames</h5>
+                        <p>Retrieve tactile sensor frames and process tactile data streams.</p>
+                        <h5>Tactile Callbacks</h5>
+                        <p>Register callbacks for real-time tactile data event handling.</p>
+                        <h5>Frame Content Model</h5>
+                        <p>Understand the structure and content of tactile data frames.</p>
+                        <h5>Deformation Mapping Helpers</h5>
+                        <p>Utility functions for mapping and interpreting tactile deformation data.</p>
+                        <h5>Tactile Statistics</h5>
+                        <p>Compute and analyze statistics from tactile sensor readings.</p>
+                        <h5>Tactile Port Recovery</h5>
+                        <p>Recover from tactile data port errors and re-establish connections.</p>
+                    </section>
+                    <section>
+                        <h3>Troubleshooting and Error Handling</h3>
+                        <p>Guide for debugging and resolving common issues and errors.</p>
+                        <h4>Error Model</h4>
+                        <p>Overview of the error handling model and error classification system.</p>
+                        <h4>Fault Inspection</h4>
+                        <p>Methods for inspecting and identifying device faults and error conditions.</p>
+                        <h4>Common Problems</h4>
+                        <p></p>
+                        <h5>No device discovered</h5>
+                        <p>Troubleshoot when devices cannot be discovered on the network.</p>
+                        <h5>Connection fails</h5>
+                        <p>Resolve connection failures and network communication issues.</p>
+                        <h5>The device does not respond to motion commands</h5>
+                        <p>Debug unresponsive device issues and command execution failures.</p>
+                        <h5>Tactile data is not received</h5>
+                        <p>Resolve missing or unavailable tactile sensor data streams.</p>
+                        <h5>Port occupied or tactile bind failure</h5>
+                        <p>Handle port conflicts and tactile communication binding errors.</p>
+                        <h5>Device becomes unreachable after IP change</h5>
+                        <p>Recover device connectivity after IP address changes.</p>
+                        <h4>Recommended Debugging Practices</h4>
+                        <p>Best practices for debugging and diagnosing SDK-related issues.</p>
+                    </section>
+                    <section>
+                        <h3>C++ SDK Guide</h3>
+                        <p>Complete guide for using the C++ SDK with advanced features and real-time capabilities.</p>
+                        <h4>Quick Start</h4>
+                        <p></p>
+                        <h5>Before You Start</h5>
+                        <p>Requirements and environment setup for C++ development.</p>
+                        <h5>Minimal C++ Example</h5>
+                        <p>A simple C++ program demonstrating SDK initialization and basic operations.</p>
+                        <h5>Compile and Run</h5>
+                        <p>Build and execute C++ examples using CMake or other build systems.</p>
+                        <h4>API Usage Guide</h4>
+                        <p></p>
+                        <h5>Device Discovery and Connection</h5>
+                        <p>Discover devices and establish connections in C++.</p>
+                        <h5>Device Lifecycle</h5>
+                        <p>Managing device states and lifecycle in C++ applications.</p>
+                        <h5>Device Information and Configuration</h5>
+                        <p>Configure devices and read device information using C++ API.</p>
+                        <h5>Motion Control</h5>
+                        <p>High-performance motion control in C++ with low-latency command execution.</p>
+                        <h5>Tactile Data</h5>
+                        <p>Access tactile sensors with high-frequency data streaming in C++.</p>
+                        <h5>Troubleshooting and Error Handling</h5>
+                        <p>Debug and handle errors in C++ applications.</p>
+                    </section>
+                    <section>
+                        <h3>Appendix</h3>
+                        <p>Additional reference materials and documentation.</p>
+                        <h4>Joint DOF Ordering</h4>
+                        <p>Reference for joint degree-of-freedom numbering and naming conventions.</p>
+                        <h4>Tactile Channel Mapping</h4>
+                        <p>Mapping of tactile sensor channels to physical locations on the hand.</p>
+                        <h4>ErrorCode (API Level)</h4>
+                        <p>Complete list of API-level error codes and their meanings.</p>
+                        <h4>FaultCode (Device Level)</h4>
+                        <p>Device-level fault codes and troubleshooting information.</p>
                     </section>
                 `
             },
@@ -1637,38 +1775,210 @@
                 breadcrumb: 'Wave',
                 content: `
                     <section>
-                        <h2>Support</h2>
-                        <p>[Wave技术支持。获取帮助和解决常见问题。我们的支持团队随时准备为您提供帮助。]</p>
-                        <p>[本页面包含常见问题、故障排除指南和联系信息。]</p>
+                        <h3>Troubleshooting</h3>
+                        <p>Complete troubleshooting guide for common issues and how to diagnose and resolve them.</p>
                     </section>
                     <section>
-                        <h3>故障排除</h3>
-                        <p>[常见问题的故障排除指南。]</p>
-                        <p>[包括诊断步骤和解决方案。]</p>
+                        <h4>Quick Diagnosis</h4>
+                        <p>Start here for a quick diagnosis of your issue. Follow these basic steps to identify the problem:</p>
+                        <ol>
+                            <li>Check device power and connection status</li>
+                            <li>Verify network connectivity</li>
+                            <li>Review indicator lights status</li>
+                            <li>Check error messages in the console</li>
+                        </ol>
                     </section>
                     <section>
-                        <h3>常见问题</h3>
-                        <div class="faq-item">
-                            <h4>[问题1：如何...？]</h4>
-                            <p>[问题1的详细答案和解决方案]</p>
-                        </div>
-                        <div class="faq-item">
-                            <h4>[问题2：为什么...？]</h4>
-                            <p>[问题2的详细答案和说明]</p>
-                        </div>
-                        <div class="faq-item">
-                            <h4>[问题3：怎样...？]</h4>
-                            <p>[问题3的详细答案和步骤]</p>
-                        </div>
-                        <div class="faq-item">
-                            <h4>[问题4：如果...怎么办？]</h4>
-                            <p>[问题4的详细答案和建议]</p>
-                        </div>
+                        <h4>Indicator Light Guide</h4>
+                        <p>Understanding the indicator lights on your device:</p>
+                        <ul>
+                            <li><strong>Green LED (Steady):</strong> Device is operating normally</li>
+                            <li><strong>Green LED (Blinking):</strong> Device is initializing or in standby mode</li>
+                            <li><strong>Yellow LED:</strong> Warning condition, check device status</li>
+                            <li><strong>Red LED:</strong> Critical error, device requires attention</li>
+                            <li><strong>No Light:</strong> Device power is off or not connected</li>
+                        </ul>
                     </section>
                     <section>
-                        <h3>获取支持</h3>
-                        <p>[联系支持团队的方式。]</p>
-                        <p>[包括电话、电子邮件、在线聊天等选项。]</p>
+                        <h4>Device Issues</h4>
+                        <p>Common device detection and connectivity problems.</p>
+                        <h5>Device Not Discovered</h5>
+                        <p>The device is not appearing in the discovered devices list:</p>
+                        <ul>
+                            <li>Check that the device is powered on</li>
+                            <li>Verify network cable connections</li>
+                            <li>Ensure the computer and device are on the same network</li>
+                            <li>Check firewall settings and network policies</li>
+                            <li>Try restarting both the device and computer</li>
+                            <li>Update network drivers if necessary</li>
+                        </ul>
+                        <h5>Device Detected but Cannot Be Controlled</h5>
+                        <p>The device appears in the device list but commands are not working:</p>
+                        <ul>
+                            <li>Verify device is in the correct control mode</li>
+                            <li>Check that the device is in "Enable" state</li>
+                            <li>Confirm control source is set correctly</li>
+                            <li>Review device logs for error messages</li>
+                            <li>Try reconnecting to the device</li>
+                            <li>Check for firmware updates</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Motion Issues</h4>
+                        <p>Problems related to device motion and joint control.</p>
+                        <h5>Single Joint Abnormal</h5>
+                        <p>One or more joints are not responding correctly:</p>
+                        <ul>
+                            <li>Check if the affected joint is mechanically obstructed</li>
+                            <li>Verify joint is properly calibrated</li>
+                            <li>Read joint state to check for error conditions</li>
+                            <li>Try moving the joint through full range of motion</li>
+                            <li>Check device temperature (may throttle if overheated)</li>
+                        </ul>
+                        <h5>Homing / Zero Position Incorrect</h5>
+                        <p>The device is not returning to the correct home position:</p>
+                        <ul>
+                            <li>Re-run calibration procedure for affected joints</li>
+                            <li>Check if home position parameters have changed</li>
+                            <li>Verify mechanical zero-stop is not damaged</li>
+                            <li>Ensure device has not been physically moved from expected position</li>
+                            <li>Review calibration history in device logs</li>
+                        </ul>
+                        <h5>Large Tracking Error</h5>
+                        <p>Device position does not match commanded position:</p>
+                        <ul>
+                            <li>Reduce motion speed for initial testing</li>
+                            <li>Check for mechanical friction or binding</li>
+                            <li>Verify motor is not overheating</li>
+                            <li>Increase control loop gains gradually</li>
+                            <li>Calibrate position sensors if available</li>
+                        </ul>
+                        <h5>Weak Grip Force</h5>
+                        <p>The device is not applying sufficient grip force:</p>
+                        <ul>
+                            <li>Check current limit settings (may need to be increased)</li>
+                            <li>Verify finger joints are not mechanically obstructed</li>
+                            <li>Check torque sensor readings</li>
+                            <li>Ensure all fingers are properly calibrated</li>
+                            <li>Test with lighter objects first to rule out other issues</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Tactile Sensing Issues</h4>
+                        <p>Problems related to tactile sensor data and feedback.</p>
+                        <h5>No Tactile Data</h5>
+                        <p>Tactile sensors are not providing any data:</p>
+                        <ul>
+                            <li>Verify tactile sensing capability is enabled</li>
+                            <li>Check tactile port connection status</li>
+                            <li>Ensure tactile calibration has been completed</li>
+                            <li>Restart tactile data stream</li>
+                            <li>Check for network bandwidth issues</li>
+                            <li>Review device logs for tactile errors</li>
+                        </ul>
+                        <h5>Abnormal Tactile Data</h5>
+                        <p>Tactile data is being received but values seem incorrect:</p>
+                        <ul>
+                            <li>Re-run tactile sensor calibration</li>
+                            <li>Check if fingertips are clean and undamaged</li>
+                            <li>Verify contact pressure is within normal range</li>
+                            <li>Review baseline sensor readings</li>
+                            <li>Check for electromagnetic interference</li>
+                        </ul>
+                        <h5>Low Frame Rate</h5>
+                        <p>Tactile data frame rate is lower than expected:</p>
+                        <ul>
+                            <li>Check network bandwidth and latency</li>
+                            <li>Reduce data processing load on host computer</li>
+                            <li>Switch to standard mode for higher frame rates</li>
+                            <li>Check USB connection quality if using USB interface</li>
+                            <li>Ensure no network congestion from other devices</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>ErrorCode vs FaultCode</h4>
+                        <p>Understanding the difference between error codes and fault codes.</p>
+                        <h5>ErrorCode (API Level)</h5>
+                        <p>API-level errors that occur during SDK operations:</p>
+                        <ul>
+                            <li><strong>0x0000:</strong> Success (no error)</li>
+                            <li><strong>0x0001:</strong> Invalid parameter</li>
+                            <li><strong>0x0002:</strong> Device not connected</li>
+                            <li><strong>0x0003:</strong> Operation timeout</li>
+                            <li><strong>0x0004:</strong> Device not ready</li>
+                            <li><strong>0x0005:</strong> Command rejected by device</li>
+                        </ul>
+                        <p>Check API documentation for complete error code list.</p>
+                        <h5>FaultCode (Device Level)</h5>
+                        <p>Device-level faults that occur in hardware:</p>
+                        <ul>
+                            <li><strong>0x0001:</strong> Motor overcurrent</li>
+                            <li><strong>0x0002:</strong> Sensor malfunction</li>
+                            <li><strong>0x0003:</strong> Temperature warning</li>
+                            <li><strong>0x0004:</strong> Communication error</li>
+                            <li><strong>0x0005:</strong> Calibration error</li>
+                            <li><strong>0x0006:</strong> Mechanical error</li>
+                        </ul>
+                        <p>Check device documentation for complete fault code list.</p>
+                    </section>
+                    <section>
+                        <h4>General Recovery Actions</h4>
+                        <p>General procedures to recover from various error conditions.</p>
+                        <h5>Quick Recovery Checklist</h5>
+                        <p>Follow this checklist to attempt quick recovery:</p>
+                        <ol>
+                            <li>Check indicator light status</li>
+                            <li>Verify power supply is functioning</li>
+                            <li>Check all cable connections</li>
+                            <li>Try power cycling the device (off for 30 seconds, then on)</li>
+                            <li>Restart the control software</li>
+                            <li>Ping device to verify network connectivity</li>
+                            <li>Re-establish connection through SDK</li>
+                            <li>If error persists, collect logs and contact support</li>
+                        </ol>
+                        <h5>Button-Based Reset & Restart</h5>
+                        <p>Using physical buttons on the device for recovery:</p>
+                        <ul>
+                            <li><strong>Reset Button:</strong> Hold for 3 seconds to reset device to factory defaults</li>
+                            <li><strong>Restart Button:</strong> Press once to restart the device</li>
+                            <li><strong>Emergency Stop:</strong> Press to stop all motion immediately</li>
+                        </ul>
+                        <p>Note: Reset to factory defaults will erase custom configurations. Make backups before resetting.</p>
+                    </section>
+                    <section>
+                        <h4>Contact Support</h4>
+                        <p>If you cannot resolve the issue using the troubleshooting guides above, please contact our support team:</p>
+                        <ul>
+                            <li><strong>Email:</strong> support@example.com</li>
+                            <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+                            <li><strong>Web Portal:</strong> https://support.example.com</li>
+                            <li><strong>Live Chat:</strong> Available Monday-Friday, 9 AM - 5 PM UTC</li>
+                        </ul>
+                        <p>When contacting support, please provide:</p>
+                        <ul>
+                            <li>Device serial number</li>
+                            <li>Firmware version</li>
+                            <li>SDK version being used</li>
+                            <li>Detailed description of the issue</li>
+                            <li>Steps to reproduce the problem</li>
+                            <li>Device logs (if available)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Best Practices for Reliable Use</h4>
+                        <p>Follow these best practices to ensure reliable operation and minimize issues:</p>
+                        <ul>
+                            <li><strong>Regular Maintenance:</strong> Perform regular maintenance checks as outlined in user manual</li>
+                            <li><strong>Keep Firmware Updated:</strong> Regularly update device firmware to latest version</li>
+                            <li><strong>Environmental Conditions:</strong> Operate device within specified temperature and humidity ranges</li>
+                            <li><strong>Proper Handling:</strong> Handle device with care to avoid physical damage</li>
+                            <li><strong>Cable Management:</strong> Keep cables organized and protected from damage</li>
+                            <li><strong>Preventive Calibration:</strong> Perform calibration regularly to maintain accuracy</li>
+                            <li><strong>Network Stability:</strong> Ensure stable network connection with adequate bandwidth</li>
+                            <li><strong>Power Supply:</strong> Use appropriate power supply and avoid power fluctuations</li>
+                            <li><strong>Documentation:</strong> Keep detailed logs of device usage and maintenance</li>
+                            <li><strong>Training:</strong> Ensure operators are properly trained on device usage</li>
+                        </ul>
                     </section>
                 `
             },
@@ -1677,30 +1987,63 @@
                 breadcrumb: 'Wave',
                 content: `
                     <section>
-                        <h2>Legal</h2>
-                        <p>[法律信息和条款。本页面包含您需要了解的所有法律条款。]</p>
-                        <p>[请仔细阅读以下所有部分。]</p>
+                        <h3>Legal Notice</h3>
+                        <p>This section contains important legal information regarding the use, operation, and maintenance of the Kaihand Wave robotic hand system. Please read carefully before using the product.</p>
                     </section>
                     <section>
-                        <h3>服务条款</h3>
-                        <p>[服务条款内容。说明用户在使用Wave服务时的权利和义务。]</p>
-                        <p>[包括使用限制、免责声明和责任条款。]</p>
-                        <p>[列出禁止的活动和用途。]</p>
-                    </section>
-                    <section>
-                        <h3>隐私政策</h3>
-                        <p>[隐私政策内容。说明我们如何收集、使用和保护您的个人数据。]</p>
-                        <p>[包括数据安全措施和用户权利。]</p>
-                    </section>
-                    <section>
-                        <h3>知识产权</h3>
-                        <p>[关于Wave产品的知识产权声明。]</p>
-                        <p>[包括许可条款和使用限制。]</p>
-                    </section>
-                    <section>
-                        <h3>免责声明</h3>
-                        <p>[产品免责声明和限制条款。]</p>
-                        <p>[包括对第三方内容的免责。]</p>
+                        <h4>Repair</h4>
+                        <p>Guidelines and restrictions regarding repair and maintenance of the device.</p>
+                        <h5>When Operating the Product</h5>
+                        <p><strong>Authorized Service Only:</strong> Do not attempt to repair or disassemble the device yourself. Unauthorized repairs may void the warranty and could result in injury or damage to the equipment.</p>
+                        <p><strong>Approved Service Centers:</strong> For any repairs needed during normal operation, contact an authorized service center or contact our support team.</p>
+                        <p><strong>Spare Parts:</strong> Only use genuine spare parts approved by the manufacturer. Using non-approved parts may affect device performance and safety.</p>
+                        <p><strong>Warranty Coverage:</strong> Repairs performed by unauthorized personnel will not be covered under warranty.</p>
+                        <p><strong>Emergency Repairs:</strong> In case of emergency malfunction:</p>
+                        <ul>
+                            <li>Immediately stop all operations</li>
+                            <li>Power down the device safely</li>
+                            <li>Document the issue with photos and error codes if available</li>
+                            <li>Contact technical support immediately</li>
+                            <li>Do not attempt to restart until issue is resolved</li>
+                        </ul>
+                        <h5>After Upgrading the Product</h5>
+                        <p><strong>Firmware Updates:</strong> After installing firmware updates, the device may require recalibration. Please refer to the firmware upgrade documentation for specific instructions.</p>
+                        <p><strong>Hardware Upgrades:</strong> If hardware components are upgraded or replaced:</p>
+                        <ul>
+                            <li>Ensure all upgrades are performed by authorized personnel</li>
+                            <li>Perform full system calibration after hardware changes</li>
+                            <li>Test all functions before returning to operation</li>
+                            <li>Update software/firmware if required for new components</li>
+                            <li>Keep detailed records of all upgrades performed</li>
+                        </ul>
+                        <p><strong>Compatibility:</strong> Ensure all upgraded components are compatible with your device model and software version.</p>
+                        <p><strong>Warranty Impact:</strong> Some upgrades may affect warranty coverage. Consult support before proceeding.</p>
+                        <h5>When Integrating the Product into Your Application</h5>
+                        <p><strong>Integration Responsibility:</strong> When integrating the Kaihand device into a larger system or application, you (the integrator) are responsible for:</p>
+                        <ul>
+                            <li>Ensuring proper electrical and mechanical integration</li>
+                            <li>Implementing appropriate safety measures for the integrated system</li>
+                            <li>Testing the complete system before deployment</li>
+                            <li>Compliance with local regulations and safety standards</li>
+                            <li>Maintenance and support of the integrated system</li>
+                        </ul>
+                        <p><strong>Technical Documentation:</strong> Consult the integration manual and technical specifications. Contact technical support for integration guidance.</p>
+                        <p><strong>Liability:</strong> The manufacturer is not responsible for issues arising from improper integration, including but not limited to:</p>
+                        <ul>
+                            <li>Damage caused by incorrect power supply connections</li>
+                            <li>Issues resulting from non-approved modifications</li>
+                            <li>Failures due to inadequate cooling or ventilation</li>
+                            <li>Problems from external interference or noise</li>
+                            <li>Data loss or system failure in integrated applications</li>
+                        </ul>
+                        <p><strong>Safety in Integration:</strong> When used in an integrated application, ensure:</p>
+                        <ul>
+                            <li>Emergency stop functionality is properly implemented for the complete system</li>
+                            <li>Appropriate guards and safety measures protect personnel</li>
+                            <li>System operates within all specified environmental limits</li>
+                            <li>Proper training is provided to all personnel using the integrated system</li>
+                            <li>Compliance with industry-specific safety standards</li>
+                        </ul>
                     </section>
                 `
             },
@@ -1966,44 +2309,35 @@
             document.querySelector('.content-body').scrollTop = 0;
         }
 
-        // ===== 生成目录 =====
+        // ===== 生成目录 - 只显示到h3（两个层级） =====
         function generateTableOfContents() {
             const articleContent = document.getElementById('articleContent');
             const tocContent = document.getElementById('tocContent');
 
             if (!articleContent || !tocContent) return;
 
-            // 只显示 h2 和 h3（两层结构）
-            const headings = articleContent.querySelectorAll('h2, h3');
+            // 收集h3, h4, h5标题
+            const headings = articleContent.querySelectorAll('h3, h4, h5');
             const toc = [];
-            // 但暴存所有h2-h5业住scroll跟踪
-            const allHeadings = articleContent.querySelectorAll('h2, h3, h4, h5');
+            let headingIndex = 0;
 
-            headings.forEach((heading, index) => {
+            headings.forEach((heading) => {
                 const level = heading.tagName.toLowerCase();
                 const text = heading.textContent.trim().replace(/[[\]]/g, '');
                 let id = heading.id;
 
                 if (!id) {
-                    id = `heading-${index}`;
+                    id = `heading-${headingIndex}`;
                     heading.id = id;
                 }
+                headingIndex++;
 
                 toc.push({ level, text, id, element: heading });
             });
 
-            // 为了scroll跟踪不能仃仃值显示业务
-            window.tocHeadings = [];
-            allHeadings.forEach(heading => {
-                if (!heading.id) {
-                    heading.id = `heading-${window.tocHeadings.length}`;
-                }
-                window.tocHeadings.push({ id: heading.id, element: heading });
-            });
-
-            // 构建两层级目录
+            // 构建三层级目录
             let tocHtml = '<ul>';
-            let currentLevel = 'h2';
+            let currentLevel = 'h3';
 
             toc.forEach(item => {
                 const itemLevel = parseInt(item.level.substring(1));
@@ -2024,12 +2358,13 @@
 
             // 关闭所有开启的列表
             const finalLevel = parseInt(currentLevel.substring(1));
-            if (finalLevel > 2) {
+            for (let i = finalLevel; i > 3; i--) {
                 tocHtml += '</ul>';
             }
             tocHtml += '</ul>';
 
             tocContent.innerHTML = tocHtml;
+            window.tocHeadings = toc;
 
             // 设置目录链接
             setupTocLinks();
@@ -2045,8 +2380,9 @@
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
-                        // 使用 scrollIntoView 精确定位到最上方
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        const contentBody = document.querySelector('.content-body');
+                        const offset = targetElement.offsetTop;
+                        contentBody.scrollTop = offset;
 
                         updateActiveToc(targetId);
 
